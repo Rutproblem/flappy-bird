@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, useWindowDimensions, Dimensions } from "react-native";
+import { View, StyleSheet, useWindowDimensions, Dimensions, TouchableWithoutFeedback, Image } from "react-native";
 import Bird from "./src/components/Bird";
 
 export default function App() {
@@ -77,4 +77,50 @@ export default function App() {
       console.log('jumpSuccessful')
     }
   }
+
+  // collision
+
+  useEffect(() => {
+    if(
+      ((birdBottom < (obstaclesNegHeight + obstacleHeight) ||
+      birdBottom > (obstaclesNegHeight + obstacleHeight + gap - 30)) && 
+      (obstaclesLeft > screenWidth/2 - 30 && obstaclesLeft < screenWidth/2 + 30)
+    ) ||
+    ((birdBottom < (obstaclesNegHeightTwo + obstacleHeight) ||
+    birdBottom > (obstaclesNegHeightTwo + obstacleHeight + gap - 30)) && 
+    (obstaclesLeftTwo > screenWidth/2 - 30 && obstaclesLeftTwo < screenWidth/2 + 30)
+    ))
+    {
+      gameOver()
+    }
+  })
+
+  const gameOver = () => {
+    clearInterval(gameTimerId);
+    clearInterval(obstaclesTimerId);
+    clearInterval(obstaclesTimerIdTwo);
+  }
+
+  return(
+    <TouchableWithoutFeedback onPress={jump}>
+      <View style={styles.container}>
+        <Image source={require('./assets/background.png')} style={styles.backgroundImage}></Image>
+        <Text style={styles.score}>Score: {score}</Text>
+        <Bird
+          birdBottom={birdBottom}
+          birdLeft={birdLeft}
+        ></Bird>
+
+        <Obstacles
+          color={'green'}
+          obstacleWidth={obstacleWidth}
+          obstacleHeight={obstacleHeight}
+          randomBottom={obstaclesNegHeight}
+          gap={gap}
+          obstaclesLeft={obstaclesLeft}
+        ></Obstacles>
+      
+      </View>
+    </TouchableWithoutFeedback>
+  )
 }
