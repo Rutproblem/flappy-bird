@@ -1,13 +1,20 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
 export default function Bird({ birdLeft, birdBottom }) {
-    const birdWidth = 50;
-    const birdHeight = 50;
+    const birdWidth = 40;
+    const birdHeight = 40;
 
     return(
-        <View
-            style={styles.bird}
-        ></View>
+        <Image
+          style={{
+            position: 'absolute',
+            left: birdLeft - (birdWidth/2),
+            bottom: birdBottom - (birdHeight/2),
+            width: 40,
+            height: 40
+          }}
+          source={require('../../assets/bird1.png')}
+        ></Image>
     )
 }
 

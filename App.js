@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, useWindowDimensions, Dimensions, TouchableWithoutFeedback, Image } from "react-native";
+import { View, StyleSheet, useWindowDimensions, Dimensions, TouchableWithoutFeedback, Image, Obstacles } from "react-native";
 import Bird from "./src/components/Bird";
 
 export default function App() {
@@ -119,8 +119,34 @@ export default function App() {
           gap={gap}
           obstaclesLeft={obstaclesLeft}
         ></Obstacles>
+
+        <Obstacles
+          color={'yellow'}
+          obstacleWidth={obstacleWidth}
+          obstacleHeight={obstacleHeight}
+          randomBottom={obstaclesNegHeightTwo}
+          gap={gap}
+          obstaclesLeft={obstaclesLeftTwo}
+        ></Obstacles>
       
       </View>
     </TouchableWithoutFeedback>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    fontSize: 32,
+    top: 50,
+    position: 'absolute',
+    zIndex: 1,
+    color: 'white'
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  }
+})
